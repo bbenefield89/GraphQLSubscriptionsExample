@@ -1,4 +1,4 @@
-const { PubSub } = require('graphql-subscriptions');
+import { PubSub } from 'graphql-subscriptions'
 
 const pubsub = new PubSub(); //create a PubSub instance
 const CHANNEL_ADDED_TOPIC = 'newChannel';
@@ -40,4 +40,4 @@ const resolvers = {
   }
 };
 
-module.exports = { resolvers }
+export { resolvers }

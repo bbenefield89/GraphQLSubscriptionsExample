@@ -1,20 +1,16 @@
-const express                = require('express');
-const { ApolloServer, gql }  = require('apollo-server-express')
-const { execute, subscribe } = require('graphql');
-const { createServer }       = require('http');
-const { SubscriptionServer } = require('subscriptions-transport-ws');
+import express                from 'express'
+import { ApolloServer, gql }  from 'apollo-server-express'
+import { execute, subscribe } from 'graphql'
+import { createServer }       from 'http'
+import { SubscriptionServer } from 'subscriptions-transport-ws'
 
-const { schema }    = require('./src/schema');
-const { resolvers } = require('./src/resolvers')
+import { typeDefs, schema }    from './src/schema'
+import { resolvers } from './src/resolvers'
 
 const PORT         = process.env.PORT || 3000;
 const app          = express();
 const ws           = createServer(app);
-const apolloServer = new ApolloServer({ schema, resolvers })
-
-import { graphqlExpress } from 'apollo-server-express';
-
-console.log(graphqlExpress)
+const apolloServer = new ApolloServer({ typeDefs, resolvers })
 
 // allows express to serve the '/graphql' endpoint/graphiql-playground
 apolloServer.applyMiddleware({ app })
